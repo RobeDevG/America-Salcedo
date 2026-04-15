@@ -66,6 +66,7 @@ export default function RootLayout({
   return (
     <html lang="es" className="bg-background">
       <body
+        suppressHydrationWarning
         className={`${playfair.variable} ${inter.variable} font-sans antialiased`}
       >
         {children}
