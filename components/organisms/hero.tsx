@@ -98,7 +98,7 @@ export function Hero() {
             
             <div className="relative h-80 w-80 overflow-hidden rounded-full border-4 border-card shadow-2xl md:h-96 md:w-96">
               <Image
-                src="/images/america-salcedo.png"
+                src="/images/America.jpg"
                 alt="Katherin América Salcedo Beltrán - Perfil híbrido profesional"
                 fill
                 className="object-cover object-top"

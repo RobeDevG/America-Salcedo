@@ -81,24 +81,24 @@ export function Contact() {
               <div
                 key={info.title}
                 data-contact-item
-                className="flex items-center gap-4 rounded-xl border border-border bg-card p-6 opacity-0 duration-700 transition-all hover:border-primary/50 hover:shadow-lg"
+                className="flex items-start gap-4 rounded-xl border border-border bg-card p-5 opacity-0 duration-700 transition-all hover:border-primary/50 hover:shadow-lg sm:items-center sm:p-6"
               >
                 <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
                   <info.icon className="h-6 w-6" />
                 </div>
-                <div>
+                <div className="min-w-0">
                   <p className="text-sm text-muted-foreground">{info.title}</p>
                   {info.link ? (
                     <a
                       href={info.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-lg font-semibold text-foreground transition-colors hover:text-primary"
+                      className="block break-all text-base font-semibold text-foreground transition-colors hover:text-primary sm:text-lg"
                     >
                       {info.value}
                     </a>
                   ) : (
-                    <p className="text-lg font-semibold text-foreground">
+                    <p className="wrap-break-word text-base font-semibold text-foreground sm:text-lg">
                       {info.value}
                     </p>
                   )}
@@ -124,9 +124,9 @@ export function Contact() {
 
               <ul className="mt-6 space-y-3">
                 {benefits.map((benefit, index) => (
-                  <li key={index} className="flex items-center gap-2 text-foreground">
-                    <CheckCircle className="h-5 w-5 text-primary" />
-                    <span>{benefit}</span>
+                  <li key={index} className="flex items-start gap-2 text-foreground">
+                    <CheckCircle className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
+                    <span className="wrap-break-word">{benefit}</span>
                   </li>
                 ))}
               </ul>
