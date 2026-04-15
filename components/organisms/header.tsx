@@ -2,21 +2,28 @@
 
 import { useState, useEffect } from "react"
 import { Menu, X } from "lucide-react"
+import { useTranslation } from "react-i18next"
 import { NavLink } from "@/components/molecules/nav-link"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
-const navItems = [
-  { href: "#inicio", label: "Inicio" },
-  { href: "#sobre-mi", label: "Sobre Mí" },
-  { href: "#servicios", label: "Servicios" },
-  { href: "#experiencia", label: "Experiencia" },
-  { href: "#contacto", label: "Contacto" },
-]
-
 export function Header() {
+  const { t, i18n } = useTranslation()
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+
+  const navItems = [
+    { href: "#inicio", label: t("nav.home") },
+    { href: "#sobre-mi", label: t("nav.about") },
+    { href: "#servicios", label: t("nav.services") },
+    { href: "#experiencia", label: t("nav.experience") },
+    { href: "#contacto", label: t("nav.contact") },
+  ]
+
+  const handleLanguageToggle = () => {
+    const nextLanguage = i18n.language === "es" ? "en" : "es"
+    i18n.changeLanguage(nextLanguage)
+  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -50,15 +57,25 @@ export function Header() {
           ))}
         </nav>
 
-        <Button asChild className="hidden md:inline-flex">
-          <a href="#contacto">Contáctame</a>
-        </Button>
+        <div className="hidden items-center gap-3 md:flex">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={handleLanguageToggle}
+            aria-label={t("nav.switchTo")}
+          >
+            {t("nav.switchLabel")}
+          </Button>
+          <Button asChild>
+            <a href="#contacto">{t("nav.contactCta")}</a>
+          </Button>
+        </div>
 
         {/* Mobile Menu Toggle */}
         <button
           className="md:hidden"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          aria-label={isMobileMenuOpen ? "Cerrar menú" : "Abrir menú"}
+          aria-label={isMobileMenuOpen ? t("nav.closeMenu") : t("nav.openMenu")}
         >
           {isMobileMenuOpen ? (
             <X className="h-6 w-6 text-foreground" />
@@ -78,6 +95,10 @@ export function Header() {
         )}
       >
         <nav className="flex flex-col gap-4 px-6 py-8">
+          <Button variant="outline" onClick={handleLanguageToggle}>
+            {t("nav.switchLabel")}
+          </Button>
+
           {navItems.map((item) => (
             <NavLink
               key={item.href}
@@ -90,7 +111,7 @@ export function Header() {
           ))}
           <Button asChild className="mt-4 w-full">
             <a href="#contacto" onClick={() => setIsMobileMenuOpen(false)}>
-              Contáctame
+              {t("nav.contactCta")}
             </a>
           </Button>
         </nav>

@@ -1,15 +1,19 @@
-import { Mail } from "lucide-react"
+"use client"
 
-const navLinks = [
-  { href: "#inicio", label: "Inicio" },
-  { href: "#sobre-mi", label: "Sobre Mí" },
-  { href: "#servicios", label: "Servicios" },
-  { href: "#experiencia", label: "Experiencia" },
-  { href: "#contacto", label: "Contacto" },
-]
+import { Mail } from "lucide-react"
+import { useTranslation } from "react-i18next"
 
 export function Footer() {
+  const { t } = useTranslation()
   const currentYear = new Date().getFullYear()
+
+  const navLinks = [
+    { href: "#inicio", label: t("nav.home") },
+    { href: "#sobre-mi", label: t("nav.about") },
+    { href: "#servicios", label: t("nav.services") },
+    { href: "#experiencia", label: t("nav.experience") },
+    { href: "#contacto", label: t("nav.contact") },
+  ]
 
   return (
     <footer className="border-t border-border bg-card py-12 px-6">
@@ -21,7 +25,7 @@ export function Footer() {
               América<span className="text-primary">.</span>
             </a>
             <p className="mt-2 text-sm text-muted-foreground">
-              Intérprete Bilingüe y Biotecnóloga Genómica
+              {t("footer.role")}
             </p>
           </div>
 
@@ -50,7 +54,7 @@ export function Footer() {
 
         <div className="mt-8 border-t border-border pt-8 text-center">
           <p className="text-sm text-muted-foreground">
-            © {currentYear} América Salcedo. Todos los derechos reservados.
+            © {currentYear} América Salcedo. {t("footer.rights")}
           </p>
         </div>
       </div>

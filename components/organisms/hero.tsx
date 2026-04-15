@@ -3,10 +3,12 @@
 import { useEffect, useRef } from "react"
 import Image from "next/image"
 import { ArrowDown, MessageCircle } from "lucide-react"
+import { useTranslation } from "react-i18next"
 import { Button } from "@/components/ui/button"
 import { LanguageBadge } from "@/components/atoms/language-badge"
 
 export function Hero() {
+  const { t } = useTranslation()
   const heroRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -41,7 +43,7 @@ export function Hero() {
         <div className="flex flex-col justify-center">
           <div data-animate className="opacity-0 duration-700">
             <span className="inline-block rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary">
-              Perfil Híbrido: Intérprete y Biotecnóloga Genómica
+              {t("hero.badge")}
             </span>
           </div>
 
@@ -56,32 +58,30 @@ export function Hero() {
             data-animate
             className="mt-4 text-xl text-muted-foreground opacity-0 duration-700 md:text-2xl"
           >
-            Comunicación bilingüe aplicada a ciencia, salud y educación
+            {t("hero.subtitle")}
           </p>
 
           <p
             data-animate
             className="mt-6 max-w-lg text-muted-foreground opacity-0 duration-700 leading-relaxed"
           >
-            Licenciada en Biotecnología Genómica con experiencia en laboratorio clínico y
-            molecular, combinada con formación avanzada en inglés e interpretación bilingüe
-            para contextos técnicos, académicos y de atención a usuarios.
+            {t("hero.description")}
           </p>
 
           <div data-animate className="mt-6 flex flex-wrap gap-3 opacity-0 duration-700">
-            <LanguageBadge language="Español" level="Lengua materna" />
-            <LanguageBadge language="English" level="Avanzado / Cambridge" />
+            <LanguageBadge language={t("hero.languageSpanish")} level={t("hero.languageSpanishLevel")} />
+            <LanguageBadge language={t("hero.languageEnglish")} level={t("hero.languageEnglishLevel")} />
           </div>
 
           <div data-animate className="mt-8 flex flex-wrap gap-4 opacity-0 duration-700">
             <Button asChild size="lg" className="gap-2">
               <a href="#contacto">
                 <MessageCircle className="h-5 w-5" />
-                Contáctame
+                {t("hero.contactButton")}
               </a>
             </Button>
             <Button variant="outline" size="lg" asChild>
-              <a href="#servicios">Ver Servicios</a>
+              <a href="#servicios">{t("hero.servicesButton")}</a>
             </Button>
           </div>
         </div>
@@ -99,7 +99,7 @@ export function Hero() {
             <div className="relative h-80 w-80 overflow-hidden rounded-full border-4 border-card shadow-2xl md:h-96 md:w-96">
               <Image
                 src="/images/America.jpg"
-                alt="Katherin América Salcedo Beltrán - Perfil híbrido profesional"
+                alt={t("hero.imageAlt")}
                 fill
                 className="object-cover object-top"
                 priority
@@ -121,7 +121,7 @@ export function Hero() {
       <a
         href="#sobre-mi"
         className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce text-muted-foreground transition-colors hover:text-primary"
-        aria-label="Desplazarse hacia abajo"
+        aria-label={t("hero.scrollDown")}
       >
         <ArrowDown className="h-6 w-6" />
       </a>

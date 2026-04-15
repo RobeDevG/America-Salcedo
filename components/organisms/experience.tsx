@@ -1,59 +1,56 @@
 "use client"
 
 import { useEffect, useRef } from "react"
+import { useTranslation } from "react-i18next"
 import { SectionTitle } from "@/components/atoms/section-title"
 
 const experiences = [
   {
     period: "2023 — 2025",
-    title: "Pasante de Servicio Social",
-    company: "Laboratorio de Biología Molecular y Fitopatología, UAS",
-    description:
-      "Análisis de material vegetal y suelo, extracción de ADN, preparación de reactivos, oligos para PCR, geles de agarosa, electroforesis, manejo de autoclave y equipo de laboratorio.",
+    titleKey: "experience.items.i1Title",
+    companyKey: "experience.items.i1Company",
+    descriptionKey: "experience.items.i1Description",
   },
   {
     period: "2021 — 2023",
-    title: "Auxiliar en Laboratorio Clínico y Biomédico",
-    company: "Universidad Autónoma de Sinaloa, campus Culiacán",
-    description:
-      "Organización, gestión y análisis de muestras biológicas aplicando técnicas de procesamiento en entornos de laboratorio clínico.",
+    titleKey: "experience.items.i2Title",
+    companyKey: "experience.items.i2Company",
+    descriptionKey: "experience.items.i2Description",
   },
   {
     period: "2025",
-    title: "Experiencia en Biología Molecular",
-    company: "Centro Nacional de Referencia de Salud Digna",
-    description:
-      "Procesamiento de ANA, PCR SARS-CoV, PCR VPH, pruebas de alérgenos y detección de Treponema pallidum.",
+    titleKey: "experience.items.i3Title",
+    companyKey: "experience.items.i3Company",
+    descriptionKey: "experience.items.i3Description",
   },
   {
     period: "2025 — 2026",
-    title: "Maestra de Apoyo en Aula",
-    company: "Colegio Sinaloa, campus Horizontes",
-    description:
-      "Apoyo en actividades de aula y maestra sombra, fortaleciendo habilidades de comunicación y acompañamiento educativo.",
+    titleKey: "experience.items.i4Title",
+    companyKey: "experience.items.i4Company",
+    descriptionKey: "experience.items.i4Description",
   },
   {
-    period: "Perfil complementario",
-    title: "Interpretación Bilingüe ES-EN",
-    company: "Ámbito académico y técnico",
-    description:
-      "Aplicación de inglés avanzado para comunicar contenido científico y facilitar interacción entre equipos o audiencias con distintos niveles de dominio del idioma.",
+    periodKey: "experience.profileComplementary",
+    titleKey: "experience.items.i5Title",
+    companyKey: "experience.items.i5Company",
+    descriptionKey: "experience.items.i5Description",
   },
 ]
 
-const certifications = [
-  "Diagnóstico de parásitos de importancia clínica (abril 2025)",
-  "Evaluación de ab anti-Treponema pallidum por inmunofluorescencia indirecta (marzo 2025)",
-  "Actualización en interpretación y clasificación de patrones de ANA (mayo 2025)",
-  "Conocimientos de cobas infinity ROCHE (agosto 2025)",
-  "Curso de manejo de RPBI (julio 2025)",
-  "Señalamientos de seguridad laboral, medio ambiente y protección civil (agosto 2025)",
-  "Orden y limpieza en áreas laborales y de servicio (agosto 2025)",
-  "Comisión de seguridad e higiene (agosto 2025)",
-  "Inglés avanzado con certificaciones Cambridge (2010-2017)",
+const certificationKeys = [
+  "experience.certifications.c1",
+  "experience.certifications.c2",
+  "experience.certifications.c3",
+  "experience.certifications.c4",
+  "experience.certifications.c5",
+  "experience.certifications.c6",
+  "experience.certifications.c7",
+  "experience.certifications.c8",
+  "experience.certifications.c9",
 ]
 
 export function Experience() {
+  const { t } = useTranslation()
   const timelineRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -87,8 +84,8 @@ export function Experience() {
         <div className="grid gap-16 lg:grid-cols-2">
           {/* Timeline */}
           <div>
-            <SectionTitle subtitle="Experiencia">
-              Trayectoria profesional
+            <SectionTitle subtitle={t("experience.subtitle")}>
+              {t("experience.title")}
             </SectionTitle>
 
             <div ref={timelineRef} className="relative">
@@ -106,14 +103,14 @@ export function Experience() {
                     <div className="absolute -left-1.5 top-1 h-3 w-3 rounded-full border-2 border-primary bg-background" />
 
                     <span className="text-sm font-medium text-primary">
-                      {exp.period}
+                      {exp.periodKey ? t(exp.periodKey) : exp.period}
                     </span>
                     <h3 className="mt-1 text-xl font-semibold text-foreground">
-                      {exp.title}
+                      {t(exp.titleKey)}
                     </h3>
-                    <p className="text-muted-foreground">{exp.company}</p>
+                    <p className="text-muted-foreground">{t(exp.companyKey)}</p>
                     <p className="mt-2 text-muted-foreground leading-relaxed">
-                      {exp.description}
+                      {t(exp.descriptionKey)}
                     </p>
                   </div>
                 ))}
@@ -123,12 +120,12 @@ export function Experience() {
 
           {/* Certifications */}
           <div>
-            <SectionTitle subtitle="Certificaciones">
-              Formación y actualización
+            <SectionTitle subtitle={t("experience.certificationsSubtitle")}>
+              {t("experience.certificationsTitle")}
             </SectionTitle>
 
             <div className="space-y-4">
-              {certifications.map((cert, index) => (
+              {certificationKeys.map((certificationKey, index) => (
                 <div
                   key={index}
                   className="group flex items-center gap-4 rounded-lg border border-border bg-card p-4 transition-all duration-300 hover:border-primary/50 hover:shadow-md"
@@ -136,7 +133,7 @@ export function Experience() {
                   <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
                     <span className="text-lg font-bold">{index + 1}</span>
                   </div>
-                  <span className="font-medium text-foreground">{cert}</span>
+                  <span className="font-medium text-foreground">{t(certificationKey)}</span>
                 </div>
               ))}
             </div>

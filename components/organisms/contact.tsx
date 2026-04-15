@@ -2,44 +2,41 @@
 
 import { useEffect, useRef } from "react"
 import { Phone, MapPin, Clock, CheckCircle, Mail } from "lucide-react"
+import { useTranslation } from "react-i18next"
 import { SectionTitle } from "@/components/atoms/section-title"
 import { Button } from "@/components/ui/button"
 
 const contactInfo = [
   {
     icon: Phone,
-    title: "Teléfono",
+    titleKey: "contact.phone",
     value: "6673 56 12 14 / 6675 68 44 23",
     link: null,
   },
   {
     icon: Mail,
-    title: "Email",
+    titleKey: "contact.email",
     value: "katherinsalcedo.fcqb2020@uas.edu.mx",
     link: "mailto:katherinsalcedo.fcqb2020@uas.edu.mx",
   },
   {
     icon: MapPin,
-    title: "Ubicación",
+    titleKey: "contact.location",
     value: "Rodolfo T. Loaiza #2744, Col. STASE 2",
     link: null,
   },
   {
     icon: Clock,
-    title: "Disponibilidad",
-    value: "Lun - Vie, 8:00 - 18:00",
+    titleKey: "contact.availability",
+    valueKey: "contact.availabilityValue",
     link: null,
   },
 ]
 
-const benefits = [
-  "Respuesta en menos de 24 horas",
-  "Perfil híbrido: ciencia + comunicación bilingüe",
-  "Apoyo en proyectos académicos y técnicos",
-  "Confidencialidad y enfoque profesional",
-]
+const benefitKeys = ["contact.benefits.b1", "contact.benefits.b2", "contact.benefits.b3", "contact.benefits.b4"]
 
 export function Contact() {
+  const { t } = useTranslation()
   const cardsRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -70,8 +67,8 @@ export function Contact() {
   return (
     <section id="contacto" className="bg-secondary/50 py-24 px-6">
       <div className="mx-auto max-w-6xl">
-        <SectionTitle subtitle="Contacto" align="center">
-          Hablemos de tu proyecto o vacante
+        <SectionTitle subtitle={t("contact.subtitle")} align="center">
+          {t("contact.title")}
         </SectionTitle>
 
         <div ref={cardsRef} className="grid gap-8 lg:grid-cols-2">
@@ -79,7 +76,7 @@ export function Contact() {
           <div className="space-y-6">
             {contactInfo.map((info, index) => (
               <div
-                key={info.title}
+                key={info.titleKey}
                 data-contact-item
                 className="flex items-start gap-4 rounded-xl border border-border bg-card p-5 opacity-0 duration-700 transition-all hover:border-primary/50 hover:shadow-lg sm:items-center sm:p-6"
               >
@@ -87,7 +84,7 @@ export function Contact() {
                   <info.icon className="h-6 w-6" />
                 </div>
                 <div className="min-w-0">
-                  <p className="text-sm text-muted-foreground">{info.title}</p>
+                  <p className="text-sm text-muted-foreground">{t(info.titleKey)}</p>
                   {info.link ? (
                     <a
                       href={info.link}
@@ -99,7 +96,7 @@ export function Contact() {
                     </a>
                   ) : (
                     <p className="wrap-break-word text-base font-semibold text-foreground sm:text-lg">
-                      {info.value}
+                      {info.valueKey ? t(info.valueKey) : info.value}
                     </p>
                   )}
                 </div>
@@ -114,19 +111,17 @@ export function Contact() {
           >
             <div>
               <h3 className="text-2xl font-bold text-foreground">
-                ¿Listo para comenzar?
+                {t("contact.ctaTitle")}
               </h3>
               <p className="mt-2 text-muted-foreground leading-relaxed">
-                Estoy disponible para colaborar en áreas de laboratorio, investigación,
-                soporte técnico-científico e interpretación bilingüe en contextos
-                académicos y profesionales.
+                {t("contact.ctaDescription")}
               </p>
 
               <ul className="mt-6 space-y-3">
-                {benefits.map((benefit, index) => (
+                {benefitKeys.map((benefitKey, index) => (
                   <li key={index} className="flex items-start gap-2 text-foreground">
                     <CheckCircle className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
-                    <span className="wrap-break-word">{benefit}</span>
+                    <span className="wrap-break-word">{t(benefitKey)}</span>
                   </li>
                 ))}
               </ul>
@@ -137,7 +132,7 @@ export function Contact() {
                 href="mailto:katherinsalcedo.fcqb2020@uas.edu.mx"
               >
                 <Mail className="h-5 w-5" />
-                Enviar correo
+                {t("contact.emailButton")}
               </a>
             </Button>
           </div>

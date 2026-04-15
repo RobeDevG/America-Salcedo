@@ -8,116 +8,116 @@ import {
   Building2,
   FlaskConical,
 } from "lucide-react"
+import { useTranslation } from "react-i18next"
 import { SectionTitle } from "@/components/atoms/section-title"
 import { ServiceCard } from "@/components/molecules/service-card"
 
 const services = [
   {
     icon: Mic,
-    title: "Interpretación Bilingüe Técnica",
-    description:
-      "Interpretación español-inglés para contextos académicos, científicos y de salud con enfoque en claridad terminológica.",
-    points: [
-      "Terminología biomédica y técnica",
-      "Sesiones presenciales y virtuales",
-      "Adaptación al nivel de la audiencia",
+    titleKey: "services.cards.technicalInterpretation.title",
+    descriptionKey: "services.cards.technicalInterpretation.description",
+    pointKeys: [
+      "services.cards.technicalInterpretation.p1",
+      "services.cards.technicalInterpretation.p2",
+      "services.cards.technicalInterpretation.p3",
     ],
   },
   {
     icon: Users,
-    title: "Acompañamiento en Reuniones y Entrevistas",
-    description:
-      "Soporte en conversaciones profesionales, sesiones de asesoría y procesos de selección con comunicación bilingüe precisa.",
-    points: [
-      "Entrevistas académicas o laborales",
-      "Mediación comunicativa profesional",
-      "Preparación previa de contexto",
+    titleKey: "services.cards.meetings.title",
+    descriptionKey: "services.cards.meetings.description",
+    pointKeys: [
+      "services.cards.meetings.p1",
+      "services.cards.meetings.p2",
+      "services.cards.meetings.p3",
     ],
   },
   {
     icon: Video,
-    title: "Soporte Remoto",
-    description:
-      "Atención virtual para interpretación, revisión de materiales y preparación de presentaciones técnicas.",
-    points: [
-      "Asesoría por videollamada",
-      "Revisión de diapositivas y guiones",
-      "Acompañamiento por etapas",
+    titleKey: "services.cards.remote.title",
+    descriptionKey: "services.cards.remote.description",
+    pointKeys: [
+      "services.cards.remote.p1",
+      "services.cards.remote.p2",
+      "services.cards.remote.p3",
     ],
   },
   {
     icon: FileText,
-    title: "Traducción y Revisión de Documentos",
-    description:
-      "Traducción de contenido técnico, académico y biomédico con consistencia terminológica y redacción clara.",
-    points: [
-      "Informes y protocolos",
-      "Documentos académicos",
-      "Control de estilo y terminología",
+    titleKey: "services.cards.translation.title",
+    descriptionKey: "services.cards.translation.description",
+    pointKeys: [
+      "services.cards.translation.p1",
+      "services.cards.translation.p2",
+      "services.cards.translation.p3",
     ],
   },
   {
     icon: Building2,
-    title: "Apoyo a Proyectos de I+D",
-    description:
-      "Colaboración en organización de actividades de investigación, documentación y comunicación de resultados.",
-    points: [
-      "Gestión y orden de evidencia",
-      "Redacción de resultados",
-      "Comunicación de avances",
+    titleKey: "services.cards.rnd.title",
+    descriptionKey: "services.cards.rnd.description",
+    pointKeys: [
+      "services.cards.rnd.p1",
+      "services.cards.rnd.p2",
+      "services.cards.rnd.p3",
     ],
   },
   {
     icon: FlaskConical,
-    title: "Asistencia en Procesos de Laboratorio",
-    description:
-      "Experiencia en prácticas de biología molecular y laboratorio clínico: PCR, reactivos, muestras y protocolos.",
-    points: [
-      "Preparación de reactivos y geles",
-      "Procesamiento de muestras",
-      "Buenas prácticas y bioseguridad",
+    titleKey: "services.cards.lab.title",
+    descriptionKey: "services.cards.lab.description",
+    pointKeys: [
+      "services.cards.lab.p1",
+      "services.cards.lab.p2",
+      "services.cards.lab.p3",
     ],
   },
 ]
 
 const capabilityBlocks = [
   {
-    title: "Sectores donde puedo aportar",
-    items: ["Diagnóstico clínico", "Biología molecular", "Educación", "Atención al paciente"],
+    titleKey: "services.sectorsTitle",
+    itemKeys: [
+      "services.sectors.clinical",
+      "services.sectors.molecular",
+      "services.sectors.education",
+      "services.sectors.care",
+    ],
   },
   {
-    title: "Tipo de entregables",
-    items: [
-      "Reportes y traducciones técnicas",
-      "Apoyo en presentaciones",
-      "Acompañamiento en entrevistas",
-      "Soporte de comunicación bilingüe",
+    titleKey: "services.deliverablesTitle",
+    itemKeys: [
+      "services.deliverables.reports",
+      "services.deliverables.presentations",
+      "services.deliverables.interviews",
+      "services.deliverables.communication",
     ],
   },
 ]
 
 export function Services() {
+  const { t } = useTranslation()
+
   return (
     <section id="servicios" className="bg-secondary/50 py-24 px-6">
       <div className="mx-auto max-w-6xl">
-        <SectionTitle subtitle="Servicios" align="center">
-          Soluciones híbridas para comunicación y ciencia aplicada
+        <SectionTitle subtitle={t("services.subtitle")} align="center">
+          {t("services.title")}
         </SectionTitle>
 
         <p className="mx-auto mb-10 max-w-3xl text-center text-muted-foreground leading-relaxed">
-          Cada servicio se adapta al contexto del proyecto: laboratorio, investigación,
-          aula o colaboración profesional. El enfoque combina precisión técnica,
-          claridad lingüística y cumplimiento de tiempos.
+          {t("services.intro")}
         </p>
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {services.map((service, index) => (
             <ServiceCard
-              key={service.title}
+              key={service.titleKey}
               icon={service.icon}
-              title={service.title}
-              description={service.description}
-              points={service.points}
+              title={t(service.titleKey)}
+              description={t(service.descriptionKey)}
+              points={service.pointKeys.map((pointKey) => t(pointKey))}
               index={index}
             />
           ))}
@@ -125,13 +125,13 @@ export function Services() {
 
         <div className="mt-10 grid gap-6 md:grid-cols-2">
           {capabilityBlocks.map((block) => (
-            <div key={block.title} className="rounded-xl border border-border bg-card p-6">
-              <h3 className="text-lg font-semibold text-foreground">{block.title}</h3>
+            <div key={block.titleKey} className="rounded-xl border border-border bg-card p-6">
+              <h3 className="text-lg font-semibold text-foreground">{t(block.titleKey)}</h3>
               <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
-                {block.items.map((item) => (
-                  <li key={item} className="flex items-start gap-2">
+                {block.itemKeys.map((itemKey) => (
+                  <li key={itemKey} className="flex items-start gap-2">
                     <span className="mt-1 h-1.5 w-1.5 rounded-full bg-primary" />
-                    <span>{item}</span>
+                    <span>{t(itemKey)}</span>
                   </li>
                 ))}
               </ul>

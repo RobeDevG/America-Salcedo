@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next"
 import { Playfair_Display, Inter } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
+import { I18nProvider } from "@/components/i18n-provider"
 import "./globals.css"
 
 const playfair = Playfair_Display({
@@ -69,7 +70,7 @@ export default function RootLayout({
         suppressHydrationWarning
         className={`${playfair.variable} ${inter.variable} font-sans antialiased`}
       >
-        {children}
+        <I18nProvider>{children}</I18nProvider>
         {process.env.NODE_ENV === "production" && <Analytics />}
       </body>
     </html>
